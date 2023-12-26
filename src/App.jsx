@@ -1,7 +1,14 @@
 import "./App.css";
+import Navbar from "./layout/Navbar";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
 function App() {
-  return <>앱 시작</>;
+  return (
+    <>
+      <Navbar />
+    </>
+  );
 }
 
 export default App;
