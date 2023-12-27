@@ -46,6 +46,7 @@ function AddUser() {
               </label>
               <input
                 onChange={onInputChange}
+                value={name}
                 type="text"
                 id="name"
                 className="form-control"
@@ -59,6 +60,7 @@ function AddUser() {
               </label>
               <input
                 onChange={onInputChange}
+                value={username}
                 type="text"
                 id="username"
                 className="form-control"
@@ -72,6 +74,7 @@ function AddUser() {
               </label>
               <input
                 onChange={onInputChange}
+                value={email}
                 type="email"
                 id="email"
                 className="form-control"
