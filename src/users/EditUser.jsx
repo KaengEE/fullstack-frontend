@@ -19,7 +19,7 @@ function EditUser() {
   //업데이트 전 유저데이터 가져오기
   const loadUser = async () => {
     const result = await axios.get(
-      `${process.env.REACT_APP_USER_API}/users/${id}`
+      `${import.meta.env.VITE_USER_API}/users/${id}`
     );
     setUser(result.data);
     //console.log(result.data);
@@ -45,7 +45,7 @@ function EditUser() {
       return;
     }
     //서버로전송
-    await axios.put(`${process.env.REACT_APP_USER_API}/users/${id}`, user);
+    await axios.put(`${import.meta.env.VITE_USER_API}/users/${id}`, user);
     navigate("/");
   };
 

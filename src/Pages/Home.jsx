@@ -12,7 +12,7 @@ function Home() {
 
   //유저가져오기
   const loadUsers = async () => {
-    const result = await axios.get(`${process.env.REACT_APP_USER_API}/users`);
+    const result = await axios.get(`${import.meta.env.VITE_USER_API}/users`);
     //console.log(result);
     setUsers(result.data);
   };
@@ -20,7 +20,7 @@ function Home() {
   //유저 삭제
   const deleteUser = async (id) => {
     if (window.confirm("삭제하시겠습니까?")) {
-      await axios.delete(`${process.env.REACT_APP_USER_API}/users/${id}`);
+      await axios.delete(`${import.meta.env.VITE_USER_API}/users/${id}`);
       loadUsers();
     }
   };

@@ -19,7 +19,7 @@ function ViewUser() {
   //유저 조회
   const loadUser = async () => {
     const result = await axios.get(
-      `${process.env.REACT_APP_USER_API}/users/${id}`
+      `${import.meta.env.VITE_USER_API}/users/${id}`
     );
     setUser(result.data);
   };
