@@ -1,28 +1,60 @@
-import { Link } from "react-router-dom";
+import axios from "axios";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 function AddUser() {
+  const [user, setUser] = useState({
+    name: "",
+    username: "",
+    email: "",
+  });
+
+  //유저객체의 속성 구조 분해(원래는 user.name)
+  const { name, username, email } = user;
+
+  const navigate = useNavigate();
+
+  const onInputChange = (e) => {
+    setUser({
+      ...user,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  //submit함수
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    //서버로전송
+    await axios.post("http://localhost:8080/users", user);
+    navigate("/");
+  };
+
   return (
     <div className="container">
       <div className="row">
         <div className="col-md-6 offset-md-3 border rounded p-4 mt-2 shadow">
           <h2 className="text-center m-4">유저 가입</h2>
           {/* 입력폼 */}
-          <div className="mb-3">
-            <label htmlFor="name" className="form-label">
-              이름
-            </label>
-            <input
-              type="text"
-              id="name"
-              className="form-control mb-3"
-              placeholder="이름 입력"
-              name="name"
-            />
+          <form onSubmit={onSubmit}>
+            <div className="mb-3">
+              <label htmlFor="name" className="form-label">
+                이름
+              </label>
+              <input
+                onChange={onInputChange}
+                type="text"
+                id="name"
+                className="form-control"
+                placeholder="이름 입력"
+                name="name"
+              />
+            </div>
             <div className="mb-3">
               <label htmlFor="username" className="form-label">
                 유저네임
               </label>
               <input
+                onChange={onInputChange}
                 type="text"
                 id="username"
                 className="form-control"
@@ -35,6 +67,7 @@ function AddUser() {
                 이메일
               </label>
               <input
+                onChange={onInputChange}
                 type="email"
                 id="email"
                 className="form-control"
@@ -58,7 +91,7 @@ function AddUser() {
                 취소
               </Link>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>
