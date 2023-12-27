@@ -24,6 +24,10 @@ function AddUser() {
   //submit함수
   const onSubmit = async (e) => {
     e.preventDefault();
+    if (name == "" || username == "" || email == "") {
+      alert("내용을 입력해주세요!");
+      return;
+    }
     //서버로전송
     await axios.post("http://localhost:8080/users", user);
     navigate("/");
