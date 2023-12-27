@@ -21,9 +21,14 @@ function Navbar() {
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-            <li className="nav-item">
+            <li className="nav-item mx-1 my-1">
               <Link to="/adduser" className="btn btn-outline-light">
                 유저 추가
+              </Link>
+            </li>
+            <li className="nav-item mx-1 my-1">
+              <Link to="/searchUser" className="btn btn-outline-light">
+                유저 검색
               </Link>
             </li>
           </ul>
