@@ -14,7 +14,7 @@ function Home() {
   };
 
   useEffect(() => {
-    //시작시,검색어입력시 유저 가져오기
+    //시작시 유저 가져오기
     loadUsers();
   }, [search]);
 
@@ -39,20 +39,27 @@ function Home() {
       loadUsers();
     }
   };
+  //유저검색
+  const onSearchClick = async (e) => {
+    e.preventDefault();
+    loadUsers();
+  };
 
   return (
     <>
-      <div className="mt-3 text-center my-4">
-        <label htmlFor="">유저검색</label>
-        <input
-          onChange={onInputChange}
-          type="text"
-          id="search"
-          name="search"
-          placeholder="유저검색..."
-          value={search}
-          className="mx-2"
-        />
+      <div className="text-center mt-3">
+        <form onSubmit={onSearchClick}>
+          <label htmlFor="">유저검색</label>
+          <input
+            onChange={onInputChange}
+            type="text"
+            id="search"
+            name="search"
+            placeholder="유저검색..."
+            value={search}
+            className="mx-2"
+          />
+        </form>
       </div>
       <div className="container">
         <table className="table border shadow my-4 text-center">
