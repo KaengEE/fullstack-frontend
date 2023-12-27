@@ -1,6 +1,6 @@
 import axios from "axios";
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 function EditUser() {
   const [user, setUser] = useState({
@@ -11,8 +11,22 @@ function EditUser() {
 
   //유저객체의 속성 구조 분해(원래는 user.name)
   const { name, username, email } = user;
-
+  //PathVariable의 id값 받기
+  const { id } = useParams();
+  //페이지이동
   const navigate = useNavigate();
+
+  //업데이트 전 유저데이터 가져오기
+  const loadUser = async () => {
+    const result = await axios.get(`http://localhost:8080/users/${id}`);
+    setUser(result.data);
+    //console.log(result.data);
+  };
+
+  //유저데이터 가져와서 user에 저장
+  useEffect(() => {
+    loadUser();
+  }, []);
 
   const onInputChange = (e) => {
     setUser({
@@ -29,7 +43,7 @@ function EditUser() {
       return;
     }
     //서버로전송
-    await axios.post("http://localhost:8080/users", user);
+    await axios.put(`http://localhost:8080/users/${id}`, user);
     navigate("/");
   };
 
@@ -46,6 +60,7 @@ function EditUser() {
               </label>
               <input
                 onChange={onInputChange}
+                value={name}
                 type="text"
                 id="name"
                 className="form-control"
@@ -59,6 +74,7 @@ function EditUser() {
               </label>
               <input
                 onChange={onInputChange}
+                value={username}
                 type="text"
                 id="username"
                 className="form-control"
@@ -72,6 +88,7 @@ function EditUser() {
               </label>
               <input
                 onChange={onInputChange}
+                value={email}
                 type="email"
                 id="email"
                 className="form-control"
@@ -85,7 +102,7 @@ function EditUser() {
                 type="submit"
                 className="btn btn-outline-primary px-3 mx-2"
               >
-                가입
+                수정
               </button>
               <Link
                 to="/"
