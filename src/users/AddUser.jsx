@@ -29,7 +29,7 @@ function AddUser() {
       return;
     }
     //서버로전송
-    await axios.post("http://localhost:8080/users", user);
+    await axios.post(`${process.env.REACT_APP_USER_API}/users`, user);
     navigate("/");
   };
 
